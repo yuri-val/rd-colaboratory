@@ -1,2 +1,7 @@
 torch
 numpy
+matplotlib
+torchvision
+requests
+pandas
+scikit-learn
