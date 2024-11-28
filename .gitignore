@@ -1,6 +1,8 @@
 
-/diff/
+**/diff/
 **/data/
+**/runs/
+
 
 .DS_Store
 
