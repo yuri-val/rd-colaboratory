@@ -8,7 +8,7 @@ from torch.utils.tensorboard import SummaryWriter
 
 
 class BaseNeuralNet(nn.Module):
-    def __init__(self, tags="base/net"):
+    def __init__(self, tags="base/net", dropout_rate=0.0):
         super().__init__()
         self.class_name = self.__class__.__name__
         self.tags = tags
@@ -17,6 +17,8 @@ class BaseNeuralNet(nn.Module):
         self.test_loader = None
         self.train_dataset = None
         self.test_dataset = None
+        self.dropout_rate = dropout_rate
+        self.dropout = nn.Dropout(p=dropout_rate)
         self.init_tensorboard()
 
     def init_datasets(self, train_dataset, test_dataset):
@@ -210,6 +212,8 @@ class BaseNeuralNet(nn.Module):
         for images, labels in self.train_loader:
             optimizer.zero_grad()
             outputs = self(images)
+            if self.dropout_rate > 0:
+                outputs = self.dropout(outputs)
             loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
