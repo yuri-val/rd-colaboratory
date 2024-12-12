@@ -3,6 +3,11 @@
 **/data/
 **/runs/
 
+**/logs/
+
+**/*-fine_tuned_model/*
+**/checkpoint-*/*
+
 
 .DS_Store
 
